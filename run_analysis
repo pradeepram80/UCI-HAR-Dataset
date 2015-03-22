@@ -1,11 +1,9 @@
-setwd("C:/Users/pradeepram80/Desktop/Coursera/Obtaining and Cleaning Data/getdata-projectfiles-UCI HAR Dataset (1)/UCI HAR Dataset")
-
 library(data.table)
 features = read.table("features.txt")    										##read list of features
-activity_labels = read.table("activity_labels.txt")									##read activity labels	
-activity_labelsdt = data.table(activity_labels)										##convert into data frame	
+activity_labels = read.table("activity_labels.txt")					##read activity labels	
+activity_labelsdt = data.table(activity_labels)							##convert into data frame	
 
-subject_test = read.table("./test/subject_test.txt")        								##read subject test data
+subject_test = read.table("./test/subject_test.txt")        ##read subject test data
 x_test = read.table("./test/X_test.txt")										##read x values of test data : 561 variable measurements of 2947 rows
 y_test = read.table("./test/y_test.txt")										##read y value  of test data : 1   variable measurements of 2947 rows
 test = cbind(y_test,subject_test,x_test)										##combine y columns with subject_test columns with x_test columns into one table
