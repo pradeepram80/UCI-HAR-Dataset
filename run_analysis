@@ -1,0 +1,27 @@
+setwd("C:/Users/pradeepram80/Desktop/Coursera/Obtaining and Cleaning Data/getdata-projectfiles-UCI HAR Dataset (1)/UCI HAR Dataset")
+
+features = read.table("features.txt")    										      ##read list of features
+activity_labels = read.table("activity_labels.txt")								##read activity labels	
+activity_labelsdt = data.table(activity_labels)									  ##convert into data frame	
+
+subject_test = read.table("./test/subject_test.txt")        						##read subject test data
+x_test = read.table("./test/X_test.txt")										            ##read x values of test data : 561 variable measurements of 2947 rows
+y_test = read.table("./test/y_test.txt")										            ##read y value  of test data : 1   variable measurements of 2947 rows
+test = cbind(y_test,subject_test,x_test)										            ##combine y columns with subject_test columns with x_test columns into one table
+
+subject_train = read.table("./train/subject_train.txt")
+x_train = read.table("./train/X_train.txt")
+y_train = read.table("./train/y_train.txt")
+train = cbind(y_train,subject_train,x_train)
+
+final = rbind(test,train)												                         ##append test rows with train rows into final data frame
+finaldt = data.table(final)												                       ##create data table finaldt from final data frame
+
+col_names = t(features)													                         ##transpose features from columns into rows
+colnames(finaldt) = c("activity","subject",col_names[2,])							   ##change the column names of finaldt with feature names
+
+finaldt[,lapply(.SD,mean)]												                       ##determines means of all columns, including activity and subject
+finaldt[,lapply(.SD,sd)]												                         ##determines sd    of all columns, including activity and subject
+write.table(finaldt[,lapply(.SD,mean),by = c("activity","subject")],"output.txt",append=FALSE)	##determines means of all columns, 		by activity and subject
+
+
