@@ -24,5 +24,4 @@ Their units have not been changed from the inputs files (X_test.txt and X_train.
 Information about summary choices:
 Each variable is averaged by the first two rows  i.e., activity and subject.
 Since there are 30 subject and 6 activities, each of the 561 variables have 180 rows. Result is 180x563 matrix
-Was unable to replace activity code with activity description due to repetitions in column names among the 561 variables. This
-tnrows an error
+Was unable to replace activity code with activity description due to repetitions in column names among the 561 variables. This throws an error
